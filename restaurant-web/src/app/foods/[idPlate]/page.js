@@ -1,12 +1,14 @@
 "use client";
 import React, { useEffect, useState } from 'react'
 
-export default function PlatePage ({params}) {
+export default function FoodPage ({params}) {
+
+
 
   const [dataPlate, setDataPlate] = useState({});
   console.log(params);
   useEffect(() => {
-    fetch(`http://localhost:443/menu/${params.idPlate}`)
+    fetch(`http://localhost:443/foods/${params.idPlate}`)
     .then(response => response.json())
     .then((data) => {
       setDataPlate(data);
@@ -17,7 +19,7 @@ export default function PlatePage ({params}) {
 
   return (
     <>
-      <h1>Plate Page</h1>
+      <h1>Food Page</h1>
       <div className="container">
         <div className="row">
           <div className="col-6">
@@ -26,13 +28,10 @@ export default function PlatePage ({params}) {
               <div className="carousel-inner">
 
                 <div className="carousel-item active">
-                  <img src='/assets/food-placeholder.jpg' className="d-block w-100" alt="temporal"></img>
+                  <img src='/assets/foodimgs/food-placeholder.jpg' className="d-block w-100" alt="temporal"></img>
                 </div>
                 <div className="carousel-item">
-                  <img src="/assets/cooked-food.jpg" className="d-block w-100" alt="placeholder"></img>
-                </div>
-                <div className="carousel-item">
-                  <img src="/assets/temporal-img.png" className="d-block w-100" alt="placeholder"></img>
+                  <img src="/assets/foodimgs/temporal-img.png" className="d-block w-100" alt="placeholder"></img>
                 </div>
               </div>
               <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">

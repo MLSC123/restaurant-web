@@ -1,3 +1,26 @@
-* {
-    background-color: red;
+
+#navBar {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    background-color: rgba(136, 40, 40, 0.219); /* Red semi-transparente (ajusta el último valor para cambiar la opacidad) */
+    border-radius: 10px; /* Ajusta este valor según la cantidad de redondeo que desees */
+    padding: 20px; /* Ajusta el relleno según sea necesario */
 }
+
+
+
+@media (max-width: 991px) {
+    .navbar-expand-lg .navbar-collapse {
+        background-color: white; /* Establece el fondo blanco */
+        position: relative;
+        top: 0px; /* Ajusta la distancia desde la parte superior según tus necesidades */
+        left: 0;
+        right: 0;
+        z-index: 1000; /* Asegura que el navbar esté en la parte superior */
+        padding: 1rem;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
+        font-size: 1.2rem;
+    }
+  }

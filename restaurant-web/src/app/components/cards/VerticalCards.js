@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from 'react'
-import CardElement from './CardElement'
+import VerticalCardElement from './VerticalCardElement'
 
 
-export default function Cards () {
-
+export default function Cards ({category}) {
+  console.log("category:", category);
   const [menuData, setMenuData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:443/menu', {
+    fetch(`http://localhost:443/${category}`, {
       method: "GET",
       headers: {
         'Content-type': 'application/json'
@@ -25,7 +25,7 @@ export default function Cards () {
     <div className="p-5 row row-cols-1 row-cols-md-4 g-3">
       {
         menuData.map((food) => {
-            return <CardElement key={food.id} food = {food}/>
+            return <VerticalCardElement key={food.id} food = {food}/>
         })
       }
     </div>

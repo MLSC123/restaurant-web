@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import NavBar from '../components/navbar/NavBar';
 
 const fetchDataAbout = async() => {
   try {
@@ -41,9 +42,10 @@ export default function AboutPage () {
   
   }, []);
 
-
+  const idPage = 2;
   return (
     <>
+      <NavBar idPage={idPage}/>
       <h1>Lista de Elementos</h1>
       <ul>
         {items.map(item => (

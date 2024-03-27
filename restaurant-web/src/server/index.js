@@ -18,6 +18,24 @@ app.use(bodyParser.json());
 
 // Rutas para el CRUD
 
+// Ruta GET (Read) para /
+app.get('/', (req, res) => {
+  // Lógica para obtener elementos desde la base de datos
+  // console.log("Request: ", req.headers);
+  console.log("Request /");
+  const sqliteQuery = "SELECT * FROM customerTestimonials";
+
+  db.all(sqliteQuery, (err, rows) => {
+    if(err) {
+      console.log("Error al traer la informacion de costumer testimonials");
+      res.status(500).json({error: err.message});
+    } else {
+      console.log(rows);
+      res.json(rows);
+    }
+  })
+});
+
 // Ruta GET (Read) para /about
 app.get('/about', (req, res) => {
   // Lógica para obtener elementos desde la base de datos
@@ -29,27 +47,45 @@ app.get('/about', (req, res) => {
   });
 });
 
-// Ruta GET (Read) para /menu
-app.get('/menu', (req, res) => {
 
-  console.log("Request /menu");
+//Ruta GET (Read) para /foods
+app.get('/foods', (req, res) => {
 
-  db.all("SELECT * FROM menuDishes", (err, rows) => {
+  console.log("Request /food");
+
+  db.all("SELECT * FROM menu WHERE category = \"foods\" ", (err, rows) => {
     if (err) {
       console.log("Error al traer la data de la db");
-      // res.status(500).json({ error: err.message });
-      return;
+      res.status(500).json({ error: err.message });
+    } else {
+      res.json( rows );
     }
-    res.json( rows );
   })
 
 });
 
-// Ruta GET (Read) para /menu/:id
-app.get('/menu/:id', (req, res) => {
+
+// Ruta GET (Read) para /drinks
+app.get('/drinks', (req, res) => {
+
+  console.log("Request /drinks");
+
+  db.all("SELECT * FROM menu WHERE category = \"drinks\" ", (err, rows) => {
+    if (err) {
+      console.log("Error al traer la data de la db");
+      res.status(500).json({ error: err.message });
+    } else {
+      res.json( rows );
+    }
+  })
+
+});
+
+
+// Ruta GET (Read) para /foods/:id
+app.get('/foods/:id', (req, res) => {
   const idPlate = req.params.id;
-  // const plateFound = menuData.find( (plate) => plate.id === idPlate );
-  const sqliteQuery = "SELECT * FROM menuDishes WHERE id = ?";
+  const sqliteQuery = "SELECT * FROM menu WHERE id = ?";
   // Ejecuta la consulta con el parámetro
   db.get(sqliteQuery, [idPlate], (err, row) => {
     if (err) {
@@ -57,6 +93,22 @@ app.get('/menu/:id', (req, res) => {
     }
     // Si no hay errores, devuelve el resultado de la consulta
     console.log("Plato encontrado: ", row);
+    res.json(row);
+  });
+});
+
+
+// Ruta GET (Read) para /foods/:id
+app.get('/drinks/:id', (req, res) => {
+  const idPlate = req.params.id;
+  const sqliteQuery = "SELECT * FROM menu WHERE id = ?";
+  // Ejecuta la consulta con el parámetro
+  db.get(sqliteQuery, [idPlate], (err, row) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    // Si no hay errores, devuelve el resultado de la consulta
+    console.log("bebida encontrada: ", row);
     res.json(row);
   });
 });
